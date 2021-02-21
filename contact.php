@@ -1,3 +1,63 @@
+<?php 
+ob_start();
+session_start();
+if(isset($_POST['submit'])){
+    // echo "<pre>";
+    // print_r($_POST);
+    // die;    
+
+    require 'PHPMailer/PHPMailerAutoload.php';
+
+    $mail = new PHPMailer;
+
+    $from = $_POST['email'];
+    $first_name = $_POST['name'];
+
+    $mail->isSMTP();                                   // Set mailer to use SMTP
+    $mail->Host = 'smtp.gmail.com';                    // Specify main and backup SMTP servers
+    $mail->SMTPAuth = true;                            // Enable SMTP authentication
+    $mail->Username = 'vijayjob296@gmail.com';          // SMTP username
+    $mail->Password = 'vijay@296'; // SMTP password
+    $mail->SMTPSecure = 'tls';                         // Enable TLS encryption, `ssl` also accepted
+    $mail->Port = 587;                                 // TCP port to connect to
+
+    $mail->setFrom('Info@freshLyne.com','FreshLyne');
+    $mail->addReplyTo('', 'FreshLyne');
+    $mail->addAddress($from);   // Add a recipient
+        
+    $mail->isHTML(true);  // Set email format to HTML
+
+    $mail->Subject = "Inquriy";
+    $mail->Body    =  $first_name  . " wrote the following:" . "\n\n" . $_POST['msg'];
+
+        if(!$mail->send()) 
+        {
+            echo 'Message could not be sent.';
+            echo 'Mailer Error: ' . $mail->ErrorInfo;
+        } else{
+            $_SESSION['msg'] = "Mail Sent. Thank you " . $first_name . ", we will contact you shortly.";
+        }
+
+    // ini_set("SMTP","smtp.gmail.com");
+    // $to = "vijayjob296@gmail.com"; // this is your Email address
+    // $from = $_POST['email']; // this is the sender's Email address
+    // $first_name = $_POST['name'];
+    // $subject = "Inquriy";
+    // $subject2 = "Copy of your form submission";
+    // $message = $first_name  . " wrote the following:" . "\n\n" . $_POST['msg'];
+    // $message2 = $first_name . "\n\n" . $_POST['msg'];
+
+    // $headers = "From:" . $from;
+    // $headers2 = "From:" . $to;
+    // if(mail($to,$subject,$message,$headers) && mail($from,$subject2,$message2,$headers2)){
+    //     echo "true";
+    //     die;
+    // } // sends a copy of the message to the sender
+    // echo "Mail Sent. Thank you " . $first_name . ", we will contact you shortly.";
+    // // You can also use header('Location: thank_you.php'); to redirect to another page.
+}
+?>
+
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -59,7 +119,7 @@
         <nav class="humberger__menu__nav mobile-menu">
             <ul>
                 <li><a href="./index.html">Home</a></li>
-                <li class="active"><a href="./contact.html">Contact</a></li>
+                <li class="active"><a href="./contact.php">Contact</a></li>
                 <li><a href="./aboutus.html">About us</a></li>
             </ul>
         </nav>
@@ -128,7 +188,7 @@
                     <nav class="header__menu">
                         <ul>
                             <li><a href="./index.html">Home</a></li>
-                            <li class="active"><a href="./contact.html">Contact</a></li>
+                            <li class="active"><a href="./contact.php">Contact</a></li>
                             <li><a href="./aboutus.html">About us</a></li>
                         </ul>
                     </nav>
@@ -291,17 +351,17 @@
                     </div>
                 </div>
             </div>
-            <form action="#">
+            <form method="post">
                 <div class="row">
                     <div class="col-lg-6 col-md-6">
-                        <input type="text" placeholder="Your name">
+                        <input type="text" name="name" placeholder="Your name">
                     </div>
                     <div class="col-lg-6 col-md-6">
-                        <input type="text" placeholder="Your Email">
+                        <input type="email" name="email"  placeholder="Your Email">
                     </div>
                     <div class="col-lg-12 text-center">
-                        <textarea placeholder="Your message"></textarea>
-                        <button type="submit" class="site-btn">SEND MESSAGE</button>
+                        <textarea placeholder="Your message" name="msg"></textarea>
+                        <button type="submit" name="submit" class="site-btn">SEND MESSAGE</button>
                     </div>
                 </div>
             </form>
