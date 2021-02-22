@@ -16,8 +16,8 @@ if(isset($_POST['submit'])){
     $mail->isSMTP();                                   // Set mailer to use SMTP
     $mail->Host = 'smtp.gmail.com';                    // Specify main and backup SMTP servers
     $mail->SMTPAuth = true;                            // Enable SMTP authentication
-    $mail->Username = 'vijayjob296@gmail.com';          // SMTP username
-    $mail->Password = 'vijay@296'; // SMTP password
+    $mail->Username = 'jenish.dumbhalia@yahoo.com';          // SMTP username
+    $mail->Password = 'Freshlyne_20'; // SMTP password
     $mail->SMTPSecure = 'tls';                         // Enable TLS encryption, `ssl` also accepted
     $mail->Port = 587;                                 // TCP port to connect to
 
@@ -118,9 +118,10 @@ if(isset($_POST['submit'])){
         </div>
         <nav class="humberger__menu__nav mobile-menu">
             <ul>
-                <li><a href="./index.html">Home</a></li>
-                <li class="active"><a href="./contact.php">Contact</a></li>
+                <li class="active"><a href="./index.html">Home</a></li>
                 <li><a href="./aboutus.html">About us</a></li>
+                <li><a href="Freshlyne Brochure.pdf" download>Catelog</a></li>
+                <li><a href="./contact.php">Contact</a></li>
             </ul>
         </nav>
         <div id="mobile-menu-wrap"></div>
@@ -188,8 +189,9 @@ if(isset($_POST['submit'])){
                     <nav class="header__menu">
                         <ul>
                             <li><a href="./index.html">Home</a></li>
-                            <li class="active"><a href="./contact.php">Contact</a></li>
                             <li><a href="./aboutus.html">About us</a></li>
+                            <li><a href="Freshlyne Brochure.pdf" download>Catelog</a></li>
+                            <li><a href="./contact.php" class="active">Contact</a></li>
                         </ul>
                     </nav>
                 </div>
